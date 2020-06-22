@@ -1,0 +1,34 @@
+:root {
+    --tamanho: 40px;
+}
+
+#jogo{
+    display: flex;
+    justify-content: center;
+}
+
+.coluna {
+    margin: 0;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.celula {
+    border: 1px solid blue;
+    width: var(--tamanho);
+    height: var(--tamanho);
+}
+
+.jogador1 {
+    border-radius: 50%;
+    background: black;
+    width: var(--tamanho);
+    height: var(--tamanho);
+}
+
+.jogador2 {
+    border-radius: 50%;
+    background: red;
+    width: var(--tamanho);
+    height: var(--tamanho);
+}
