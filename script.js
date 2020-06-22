@@ -1,4 +1,4 @@
-let jogadorAtv = null;
+let jogadorAtv = 1;
 const jogo = document.getElementById("jogo");
 const tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0],
@@ -44,10 +44,31 @@ initTabuleiro();
     // cada liniha precisa receber a classe correspondente no css;
     // cada célula precisa receber a classe correspondente no css;
 
+// define o primeiro jogador (1/2);
+let jogadorAtual = 1;
+const classJogadorUm = "celula jogador1";
+const classJogadorDois = "celula jogador2"
+
 // função que cria a div do jogador 1 ou 2:
-    // inicia com o jogador atual;
+    // o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
+    
+// inicia com o jogador atual;
     // cria a div correspondente à classe;
     // altera para o próximo jogador;
+const criaDivJogador = (jogador, lugar) => {
+
+    let criaDiv = document.createElement('div')
+
+    if (jogador === 1) {
+        criaDiv.className = classJogadorUm;
+        lugar.appendChild(criaDiv)
+        jogadorAtual = 2;
+    } else {
+        criaDiv.className = classJogadorDois;
+        lugar.appendChild(criaDiv);
+        jogadorAtual = 1;
+    }
+}
 
 // função que verifica a a posição de inserção da peça do player:
     // chama a função de criação do jogador;
@@ -63,7 +84,7 @@ initTabuleiro();
         // cria a div do resultado;
         // atribui a classe correspondente;
         // apensa a div no lugar dela no html;
-    
+
     // se houver empate:
         // cria div do resultado;
         // atribui a classe correspondente;
