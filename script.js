@@ -16,6 +16,8 @@ const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2";
 
 // função que cria a tabela com 7 colunas e 6 linhas:
+    // cada liniha precisa receber a classe correspondente no css;
+    // cada célula precisa receber a classe correspondente no css;
 function initTabuleiro() {
     createElementsColuna("coluna");
     createElementsCelula("celula");
@@ -100,7 +102,6 @@ function condicaoVitoria(){
 initTabuleiro();
 condicaoVitoria();
 
-
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
@@ -124,28 +125,24 @@ const criaDivJogador = () => {
     }
 }
 
-let coluna1 = document.getElementById("coluna1");
-let coluna2 = document.getElementById("coluna2");
-let coluna3 = document.getElementById("coluna3");
-let coluna4 = document.getElementById("coluna4");
-let coluna5 = document.getElementById("coluna5");
-let coluna6 = document.getElementById("coluna6");
-let coluna7 = document.getElementById("coluna7");
+document.getElementById("coluna1").addEventListener('click', jogada)
+document.getElementById("coluna2").addEventListener('click', jogada)
+document.getElementById("coluna3").addEventListener('click', jogada)
+document.getElementById("coluna4").addEventListener('click', jogada)
+document.getElementById("coluna5").addEventListener('click', jogada)
+document.getElementById("coluna6").addEventListener('click', jogada)
+document.getElementById("coluna7").addEventListener('click', jogada)
 
-coluna1.addEventListener('click', (e) => {
+function jogada(e) {
+    if (e.path[0].childElementCount === 0 && e.path[0].className == 'celula') {
+        let jogadorAtual = criaDivJogador()
+        let pai = e.target
+        pai.appendChild(jogadorAtual)
+    } else {
+        alert('Joagada errada, tente outro campo!')
+    }
+}
 
-    console.log(e.currentTarget);
-    // let pai = e.currentTarget;
-
-    // if (e.path[0].childElementCount === 0 && e.path[0].className == 'celula') {
-    //     let jogadorAtual = criaDivJogador();
-    //     pai.appendChild(jogadorAtual);
-    //     console.log(pai)
-    // }
-})
-
-// função que verifica a a posição de inserção da peça do player:
-    // chama a função de criação do jogador;
 
 // função que verifica a condição de vitória/empate:
     // 4 peças lado a lado na horizontal;
