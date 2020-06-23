@@ -43,8 +43,6 @@ function createElementsCelula(className) {
 }
 initTabuleiro();
 
-
-
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
@@ -68,6 +66,7 @@ const criaDivJogador = () => {
     }
 }
 
+// Captura o ID das colunas para implementar a função de imprimir o disco do jogador:
 let coluna1 = document.getElementById("coluna1");
 let coluna2 = document.getElementById("coluna2");
 let coluna3 = document.getElementById("coluna3");
@@ -76,20 +75,37 @@ let coluna5 = document.getElementById("coluna5");
 let coluna6 = document.getElementById("coluna6");
 let coluna7 = document.getElementById("coluna7");
 
-coluna1.addEventListener('click', (e) => {
 
-    console.log(e.currentTarget);
-    // let pai = e.currentTarget;
+// Função que imprime o disco do jogador >>>>>>>>>> funcionando apenas quando o clique é na célula onde quer colocar o disco; <<<<<<<<<<
+//// O parâmetro é correspondente ao evento de clique;
+const imprimeJogador = (evento) => {
+    let isCelula = evento.target.classList.contains('celula');
+    let isColuna = evento.target.classList.contains('coluna');
+    let hasChild = evento.target.childElementCount;
+    let target = evento.target;
+    
+    
+    if (isCelula === true && hasChild === 0) {
+        let jogadorAtual = criaDivJogador();
+        target.appendChild(jogadorAtual);
+    }
+    
+    console.log(evento);
+    console.log(`É célula? R: ${isCelula}`);
+    console.log(`É coluna? R: ${isColuna}`);
+    console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
+}
 
-    // if (e.path[0].childElementCount === 0 && e.path[0].className == 'celula') {
-    //     let jogadorAtual = criaDivJogador();
-    //     pai.appendChild(jogadorAtual);
-    //     console.log(pai)
-    // }
-})
 
-// função que verifica a a posição de inserção da peça do player:
-    // chama a função de criação do jogador;
+// Eventos de clique com a função de imprimir o disco do jogador:
+coluna1.addEventListener('click', imprimeJogador)
+coluna2.addEventListener('click', imprimeJogador)
+coluna3.addEventListener('click', imprimeJogador)
+coluna4.addEventListener('click', imprimeJogador)
+coluna5.addEventListener('click', imprimeJogador)
+coluna6.addEventListener('click', imprimeJogador)
+coluna7.addEventListener('click', imprimeJogador)
+
 
 // função que verifica a condição de vitória/empate:
     // 4 peças lado a lado na horizontal;
