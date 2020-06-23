@@ -1,34 +1,48 @@
 :root {
-    --tamanho: 40px;
+    --tamanho: 2rem;
+    --cor-fundo: white;
+    --cor-jogador1: black;
+    --cor-jogador2: red;
 }
 
 #jogo{
     display: flex;
     justify-content: center;
+    background: var(--cor-fundo);
 }
 
 .coluna {
-    margin: 0;
     display: inline-flex;
     flex-direction: column;
+    background: blue;
+    border: 0.5px solid darkblue;
+    padding: 2px;
 }
 
 .celula {
-    border: 1px solid blue;
+    border: 0.9px solid darkblue;
+    border-radius: 50%;
     width: var(--tamanho);
     height: var(--tamanho);
+    background: var(--cor-fundo);
+    margin: 2px;
+}
+
+.jogador1, .jogador2 {
+    border-radius: 50%;
+    width: var(--tamanho);
+    height: var(--tamanho);
+    margin: 2px;
+    border: 0.9px solid darkblue;
 }
 
 .jogador1 {
-    border-radius: 50%;
-    background: black;
-    width: var(--tamanho);
-    height: var(--tamanho);
+    background: var(--cor-jogador1);
+}
+.jogador2 {
+    background: var(--cor-jogador2);
 }
 
-.jogador2 {
-    border-radius: 50%;
-    background: red;
-    width: var(--tamanho);
-    height: var(--tamanho);
+.coluna .celula:hover {
+    background: #80808048;
 }
