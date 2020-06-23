@@ -12,7 +12,8 @@
 }
 
 .coluna {
-    display: inline-flex;
+    margin: 0;
+    display: flex;
     flex-direction: column;
     background: blue;
     border: 0.5px solid darkblue;
