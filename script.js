@@ -1,4 +1,3 @@
-let jogadorAtv = 1;
 const jogo = document.getElementById("jogo");
 const tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0],
@@ -6,7 +5,7 @@ const tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 1, 2, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0],
 ]
 
 // função que cria a tabela com 7 colunas e 6 linhas:
@@ -21,6 +20,7 @@ function initTabuleiro() {
 function createElementsColuna(className) {
     for(let k = 0; k < 7; k++){
         const celula = document.createElement('div');
+        celula.id = `coluna${k+1}`
         celula.className = className;
         jogo.appendChild(celula);
     } return;
@@ -42,8 +42,9 @@ initTabuleiro();
 const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2"
 
+
 // define o primeiro jogador (1/2);
-// let jogadorAtv === 1;
+let jogadorAtv = 1;
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
@@ -70,18 +71,15 @@ const criaDivJogador = () => {
 
 // função que verifica a a posição de inserção da peça do player:
     // chama a função de criação do jogador;
-let jogador = document.querySelectorAll('.coluna').addEventListener('click', jogada)
+let jogada = document.querySelectorAll('.coluna').addEventListener('click', (e)) => {
 
-function jogada() {
-    if (!vitoria) {
-        if (jovadorAtv === 1)
-        criaDivJogador()
-        criaDiv.appendChild(jogador)
-        
+    let pai = e.target
+
+    if (e.path[0].childElementCount === 0 && e.path[0].className = 'celula') {
+        let jogadorAtual = criaDivJogador()
+        pai.appendChild(jogadorAtual)
     }
 }
-
-
 
 
 // função que verifica a condição de vitória/empate:
