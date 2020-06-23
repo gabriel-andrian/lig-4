@@ -1,4 +1,3 @@
-let jogadorAtv = 1;
 const jogo = document.getElementById("jogo");
 const tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0],
@@ -9,6 +8,7 @@ const tabuleiro = [
     [0, 0, 0, 0, 0, 0, 0],
 ]
 
+// função que cria a tabela com 7 colunas e 6 linhas:
 function initTabuleiro() {
     createElementsColuna("coluna");
     createElementsCelula("celula");
@@ -18,6 +18,7 @@ function initTabuleiro() {
 function createElementsColuna(className) {
     for(let k = 0; k < 7; k++){
         const celula = document.createElement('div');
+        celula.id = `coluna${k+1}`
         celula.className = className;
         jogo.appendChild(celula);
     } return;
@@ -36,37 +37,32 @@ function createElementsCelula(className){
 initTabuleiro();
 
 
-// define o primeiro jogador (1/2);
-// define a estrutura 7x6;
-
-// função que cria a tabela com 7 colunas e 6 linhas:
-    // cada coluna terá 6 células;
-    // cada liniha precisa receber a classe correspondente no css;
-    // cada célula precisa receber a classe correspondente no css;
-
-// define o primeiro jogador (1/2);
-let jogadorAtual = 1;
+// classes do jogador no css:
 const classJogadorUm = "celula jogador1";
 const classJogadorDois = "celula jogador2"
 
+// define o primeiro jogador (1/2);
+let jogadorAtv = 1;
 // função que cria a div do jogador 1 ou 2:
-    // o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
+//// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
+const criaDivJogador = () => {
     
-// inicia com o jogador atual;
-    // cria a div correspondente à classe;
-    // altera para o próximo jogador;
-const criaDivJogador = (jogador, lugar) => {
-
-    let criaDiv = document.createElement('div')
-
-    if (jogador === 1) {
+    // inicia com o jogador atual;
+    if (jogadorAtv === 1) {
+        // cria a div correspondente à classe;
+        let criaDiv = document.createElement('div')
+        // altera para o próximo jogador;
+        jogadorAtv = 2;
         criaDiv.className = classJogadorUm;
-        lugar.appendChild(criaDiv)
-        jogadorAtual = 2;
+        return criaDiv
     } else {
+        // cria a div correspondente à classe;
+        let criaDiv = document.createElement('div')
         criaDiv.className = classJogadorDois;
-        lugar.appendChild(criaDiv);
-        jogadorAtual = 1;
+        // altera para o próximo jogador;
+        jogadorAtv = 1;
+        criaDiv.className = classJogadorDois;
+        return criaDiv
     }
 }
 
