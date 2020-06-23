@@ -45,6 +45,8 @@ initTabuleiro();
 
 
 
+// define o primeiro jogador (1/2);
+let jogadorAtv = 1;
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
