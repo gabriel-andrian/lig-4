@@ -10,8 +10,10 @@ const tabuleiro = [
 
 // define o primeiro jogador (1/2);
 let jogadorAtv = 1;
-
+let gameOver = false;
+let linha = 0;
 let coluna = 0;
+let cont = 0;
 
 // classes do jogador no css:
 const classJogadorUm = "jogador1";
@@ -48,6 +50,10 @@ function createElementsCelula(className) {
 }
 
 function condicaoVitoria() {
+    // Verifica se não foi empate:
+    if(cont === 42){
+        mensagemEmpate();
+    }
     // Encontrar se tem 4 iguais na HORIZONTAL:
     const bordaX = (tabuleiro[0].length) - 3;
     // loop nas linhas do tabuleiro:
@@ -55,9 +61,9 @@ function condicaoVitoria() {
         // linha em cada celula da linha:
         for (let x = 0; x < bordaX; x++) {
             let celula = tabuleiro[l][x];
-            if (celula !== 0) {
-                if (celula === tabuleiro[l][x + 1] && celula === tabuleiro[l][x + 2] && celula === tabuleiro[l][x + 3]) {
-                    // FIM do jogo 4 seguidos na horizontal.
+            if(celula !== 0){
+                if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
+                    mensagemVitoria();
                 }
             }
         }
@@ -67,9 +73,9 @@ function condicaoVitoria() {
     for (let l = 0; l < bordaY; l++) {
         for (let x = 0; x < tabuleiro[0].length; x++) {
             const celula = tabuleiro[l][x];
-            if (celula !== 0) {
-                if (celula === tabuleiro[l + 1][x] && celula === tabuleiro[l + 2][x] && celula === tabuleiro[l + 3][x]) {
-                    // FIM do jogo 4 seguidos na Vertical.
+            if(celula !== 0){
+                if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
+                    mensagemVitoria();
                 }
             }
         }
@@ -78,9 +84,9 @@ function condicaoVitoria() {
     for (let l = 0; l < bordaY; l++) {
         for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if (celula !== 0) {
-                if (celula === tabuleiro[l + 1][x + 1] && celula === tabuleiro[l + 2][x + 2] && celula === tabuleiro[l + 3][x + 3]) {
-                    // Fim de jogo 4 seguidos Diagonal esquerda p/ direita.
+            if(celula !== 0){
+                if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
+                    mensagemVitoria();
                 }
 
             }
@@ -90,15 +96,36 @@ function condicaoVitoria() {
     for (let l = 3; l < tabuleiro.length; l++) {
         for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if (celula !== 0) {
-                if (celula === tabuleiro[l - 1][x + 1] && celula === tabuleiro[l - 2][x + 2] && celula === tabuleiro[l - 3][x + 3]) {
-                    // FIM de jogo 4 seguidos Diagonal Direita p/ esquerda.
+            if(celula !== 0){
+                if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
+                    mensagemVitoria();
                 }
-
             }
         }
     }
 
+}
+
+function mensagemVitoria(){
+    // Aparece a mensagem de vitória com o botão de reset e quem ganhou.
+    gameOver = true;
+    const divVitoria = document.getElementById('vencedor');
+    const mensagemVitoria = document.getElementById('msgVitoria')
+    divVitoria.style.visibility = "visible";
+    if(jogadorAtv === 1){
+        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 2 GANHOU!!!";
+    } else{
+        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 1 GANHOU!!!";
+    }
+}
+
+function mensagemEmpate(){
+    // Aparece a mensagem de empate com o botão de reset.
+    gameOver = true;
+    const divVitoria = document.getElementById('vencedor');
+    const mensagemVitoria = document.getElementById('msgVitoria')
+    divVitoria.style.visibility = "visible";
+    mensagemVitoria.textContent = "EMPATE!";
 }
 
 // função que cria a div do jogador 1 ou 2:
@@ -125,44 +152,43 @@ const criaDivJogador = () => {
 }
 
 function jogada(e) {
-
-    // Retorna true ou false
-    let isCelula = e.target.classList.contains('celula');
-    let isColuna = e.target.classList.contains('coluna');
-
-    // Retorna a quantidade de filhos da célula clicada
-    let hasChild = e.target.childElementCount;
-
-    // Captura a célula clicada
-    let target = e.currentTarget;
-
-    // Modifica o número (index) da coluna
-    coluna = parseInt(e.target.parentNode.id.split('').pop()) - 1;
-
-    if (isCelula === true && hasChild === 0) {
-        for (let i = 5; i >= 0; i--) {
-            let celula = target.childNodes[i]
-            if (celula.childElementCount === 0) {
-                let jogadorAtual = criaDivJogador()
-                celula.appendChild(jogadorAtual)
-                // tabuleiro[coluna][]
-                // console.log(target.childNodes[i])
-                break
+    if(gameOver !== true){
+        // Retorna true ou false
+        let isCelula = e.target.classList.contains('celula');
+        let isColuna = e.target.classList.contains('coluna');
+    
+        // Retorna a quantidade de filhos da célula clicada
+        let hasChild = e.target.childElementCount;
+    
+        // Captura a célula clicada
+        let target = e.currentTarget;
+    
+        // Modifica o número (index) da coluna
+        coluna = parseInt(e.target.parentNode.id.split('').pop()) - 1;
+    
+        if (isCelula === true && hasChild === 0) {
+            for (let i = 5; i >= 0; i--) {
+                let celula = target.childNodes[i]
+                if (celula.childElementCount === 0) {
+                    linha = i;
+                    let jogadorAtual = criaDivJogador()
+                    celula.appendChild(jogadorAtual)
+                    if(jogadorAtv === 1){
+                        tabuleiro[linha][coluna] = 2;
+                        cont+= 1;
+                        condicaoVitoria();
+                    } else{
+                        tabuleiro[linha][coluna] = 1;
+                        cont+= 1;
+                        condicaoVitoria();
+                    }
+                    break
+                }
             }
         }
-    } else {
-        alert('Joagada errada, tente outro campo!')
     }
-
-
-    // console.log(target.childNodes[5])
-    // console.log(target.lastElementChild)
-    // console.log(e);
-    // console.log(`É célula? R: ${isCelula}`);
-    // console.log(`É coluna? R: ${isColuna}`);
-    // console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
-
 }
+
 
 const atualizaPos = () => {
     // cada index do array é uma coluna da tabela, -1
@@ -172,7 +198,6 @@ const atualizaPos = () => {
 }
 
 initTabuleiro();
-condicaoVitoria();
 
 for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
