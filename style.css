@@ -1,5 +1,5 @@
-:root {
-    --tamanho: 2rem;
+:root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
+    --tamanho: 3rem;
     --cor-fundo: white;
     --cor-jogador1: orange;
     --cor-jogador2: yellow;
@@ -8,6 +8,9 @@
 header {
     background: whitesmoke;
     height: 50px;
+    font-family: 'Bungee', cursive;
+    text-align: center;
+    color: blue;
 }
 
 #jogo{
