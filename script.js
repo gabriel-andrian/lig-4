@@ -11,13 +11,15 @@ const tabuleiro = [
 // define o primeiro jogador (1/2);
 let jogadorAtv = 1;
 
+let coluna = 0;
+
 // classes do jogador no css:
 const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2";
 
 // função que cria a tabela com 7 colunas e 6 linhas:
-    // cada liniha precisa receber a classe correspondente no css;
-    // cada célula precisa receber a classe correspondente no css;
+// cada liniha precisa receber a classe correspondente no css;
+// cada célula precisa receber a classe correspondente no css;
 function initTabuleiro() {
     createElementsColuna("coluna");
     createElementsCelula("celula");
@@ -45,39 +47,39 @@ function createElementsCelula(className) {
     }
 }
 
-function condicaoVitoria(){
+function condicaoVitoria() {
     // Encontrar se tem 4 iguais na HORIZONTAL:
     const bordaX = (tabuleiro[0].length) - 3;
     // loop nas linhas do tabuleiro:
-    for(let l = 0; l < tabuleiro.length; l++){
+    for (let l = 0; l < tabuleiro.length; l++) {
         // linha em cada celula da linha:
-        for(let x = 0; x < bordaX; x++){
+        for (let x = 0; x < bordaX; x++) {
             let celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l][x + 1] && celula === tabuleiro[l][x + 2] && celula === tabuleiro[l][x + 3]) {
                     // FIM do jogo 4 seguidos na horizontal.
                 }
             }
-        } 
+        }
     }
     // Encontrar se tem 4 iguais na VERTICAL:
     const bordaY = (tabuleiro.length) - 3;
-    for(let l = 0; l < bordaY; l++){
-        for(let x = 0; x < tabuleiro[0].length; x++){
+    for (let l = 0; l < bordaY; l++) {
+        for (let x = 0; x < tabuleiro[0].length; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l + 1][x] && celula === tabuleiro[l + 2][x] && celula === tabuleiro[l + 3][x]) {
                     // FIM do jogo 4 seguidos na Vertical.
                 }
             }
         }
     }
     // Encontrar se tem 4 iguais na Diagonal esquerda p/ direita:
-    for(let l = 0; l < bordaY; l++){
-        for(let x = 0; x < bordaX; x++){
+    for (let l = 0; l < bordaY; l++) {
+        for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l + 1][x + 1] && celula === tabuleiro[l + 2][x + 2] && celula === tabuleiro[l + 3][x + 3]) {
                     // Fim de jogo 4 seguidos Diagonal esquerda p/ direita.
                 }
 
@@ -85,11 +87,11 @@ function condicaoVitoria(){
         }
     }
     // Encontrar se tem 4 iguais na Diagonal direita p/ esquerda:
-    for(let l = 3; l < tabuleiro.length; l++){
-        for(let x = 0; x < bordaX; x++){
+    for (let l = 3; l < tabuleiro.length; l++) {
+        for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l - 1][x + 1] && celula === tabuleiro[l - 2][x + 2] && celula === tabuleiro[l - 3][x + 3]) {
                     // FIM de jogo 4 seguidos Diagonal Direita p/ esquerda.
                 }
 
@@ -97,7 +99,7 @@ function condicaoVitoria(){
         }
     }
 
-} 
+}
 
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
@@ -123,46 +125,56 @@ const criaDivJogador = () => {
 }
 
 function jogada(e) {
-    
+
     // Retorna true ou false
     let isCelula = e.target.classList.contains('celula');
     let isColuna = e.target.classList.contains('coluna');
-    
+
     // Retorna a quantidade de filhos da célula clicada
     let hasChild = e.target.childElementCount;
-    
+
     // Captura a célula clicada
     let target = e.currentTarget;
-    
+
+    // Modifica o número (index) da coluna
+    coluna = parseInt(e.target.parentNode.id.split('').pop()) - 1;
+
     if (isCelula === true && hasChild === 0) {
         for (let i = 5; i >= 0; i--) {
             let celula = target.childNodes[i]
-                if (celula.childElementCount === 0) {
-                    let jogadorAtual = criaDivJogador()
-                    celula.appendChild(jogadorAtual)
-                    console.log(target.childNodes[i])
-                    break
+            if (celula.childElementCount === 0) {
+                let jogadorAtual = criaDivJogador()
+                celula.appendChild(jogadorAtual)
+                // tabuleiro[coluna][]
+                // console.log(target.childNodes[i])
+                break
             }
         }
     } else {
         alert('Joagada errada, tente outro campo!')
     }
-    
+
 
     // console.log(target.childNodes[5])
-    // console.log(target)
     // console.log(target.lastElementChild)
     // console.log(e);
     // console.log(`É célula? R: ${isCelula}`);
     // console.log(`É coluna? R: ${isColuna}`);
     // console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
-    
+
+}
+
+const atualizaPos = () => {
+    // cada index do array é uma coluna da tabela, -1
+    // cada index do subarray representa o numero da linha
+
+    let idColuna = document.getElementById("coluna")
 }
 
 initTabuleiro();
 condicaoVitoria();
 
-for (let a= 1; a <= 7; a++) {
+for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
 }
 
