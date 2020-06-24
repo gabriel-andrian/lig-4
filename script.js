@@ -11,8 +11,9 @@ const tabuleiro = [
 // define o primeiro jogador (1/2);
 let jogadorAtv = 1;
 let gameOver = false;
-
+let linha = 0;
 let coluna = 0;
+let cont = 0;
 
 // classes do jogador no css:
 const classJogadorUm = "jogador1";
@@ -49,6 +50,10 @@ function createElementsCelula(className) {
 }
 
 function condicaoVitoria() {
+    // Verifica se não foi empate:
+    if(cont === 42){
+        mensagemEmpate();
+    }
     // Encontrar se tem 4 iguais na HORIZONTAL:
     const bordaX = (tabuleiro[0].length) - 3;
     // loop nas linhas do tabuleiro:
@@ -95,7 +100,6 @@ function condicaoVitoria() {
                 if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
                     mensagemVitoria();
                 }
-
             }
         }
     }
@@ -103,11 +107,25 @@ function condicaoVitoria() {
 }
 
 function mensagemVitoria(){
+    // Aparece a mensagem de vitória com o botão de reset e quem ganhou.
     gameOver = true;
     const divVitoria = document.getElementById('vencedor');
     const mensagemVitoria = document.getElementById('msgVitoria')
     divVitoria.style.visibility = "visible";
-    mensagemVitoria.textContent = "PARABÉNS O JOGADOR "+jogadorAtv+" GANHOU!!!";
+    if(jogadorAtv === 1){
+        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 2 GANHOU!!!";
+    } else{
+        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 1 GANHOU!!!";
+    }
+}
+
+function mensagemEmpate(){
+    // Aparece a mensagem de empate com o botão de reset.
+    gameOver = true;
+    const divVitoria = document.getElementById('vencedor');
+    const mensagemVitoria = document.getElementById('msgVitoria')
+    divVitoria.style.visibility = "visible";
+    mensagemVitoria.textContent = "EMPATE!";
 }
 
 // função que cria a div do jogador 1 ou 2:
@@ -152,15 +170,21 @@ function jogada(e) {
             for (let i = 5; i >= 0; i--) {
                 let celula = target.childNodes[i]
                 if (celula.childElementCount === 0) {
+                    linha = i;
                     let jogadorAtual = criaDivJogador()
                     celula.appendChild(jogadorAtual)
-                    // tabuleiro[coluna][]
-                    // console.log(target.childNodes[i])
+                    if(jogadorAtv === 1){
+                        tabuleiro[linha][coluna] = 2;
+                        cont+= 1;
+                        condicaoVitoria();
+                    } else{
+                        tabuleiro[linha][coluna] = 1;
+                        cont+= 1;
+                        condicaoVitoria();
+                    }
                     break
                 }
             }
-        } else {
-            alert('Joagada errada, tente outro campo!')
         }
     }
 }
@@ -174,7 +198,6 @@ const atualizaPos = () => {
 }
 
 initTabuleiro();
-condicaoVitoria();
 
 for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
