@@ -16,12 +16,14 @@ const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2";
 
 // função que cria a tabela com 7 colunas e 6 linhas:
+    // cada liniha precisa receber a classe correspondente no css;
+    // cada célula precisa receber a classe correspondente no css;
 function initTabuleiro() {
     createElementsColuna("coluna");
     createElementsCelula("celula");
 }
 
-
+// Criação das divs colunas, loop de criação de 7 colunas.
 function createElementsColuna(className) {
     for (let k = 0; k < 7; k++) {
         const celula = document.createElement('div');
@@ -31,6 +33,7 @@ function createElementsColuna(className) {
     } return;
 }
 
+// Criação das divs celulas dentro das divs colunas criadas, 6 celulas cada coluna.
 function createElementsCelula(className) {
     let arrayColunas = document.querySelectorAll('.coluna');
     for (let i = 0; i < arrayColunas.length; i++) {
@@ -41,7 +44,60 @@ function createElementsCelula(className) {
         }
     }
 }
-initTabuleiro();
+
+function condicaoVitoria(){
+    // Encontrar se tem 4 iguais na HORIZONTAL:
+    const bordaX = (tabuleiro[0].length) - 3;
+    // loop nas linhas do tabuleiro:
+    for(let l = 0; l < tabuleiro.length; l++){
+        // linha em cada celula da linha:
+        for(let x = 0; x < bordaX; x++){
+            let celula = tabuleiro[l][x];
+            if(celula !== 0){
+                if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
+                    // FIM do jogo 4 seguidos na horizontal.
+                }
+            }
+        } 
+    }
+    // Encontrar se tem 4 iguais na VERTICAL:
+    const bordaY = (tabuleiro.length) - 3;
+    for(let l = 0; l < bordaY; l++){
+        for(let x = 0; x < tabuleiro[0].length; x++){
+            const celula = tabuleiro[l][x];
+            if(celula !== 0){
+                if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
+                    // FIM do jogo 4 seguidos na Vertical.
+                }
+            }
+        }
+    }
+    // Encontrar se tem 4 iguais na Diagonal esquerda p/ direita:
+    for(let l = 0; l < bordaY; l++){
+        for(let x = 0; x < bordaX; x++){
+            const celula = tabuleiro[l][x];
+            if(celula !== 0){
+                if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
+                    // Fim de jogo 4 seguidos Diagonal esquerda p/ direita.
+                }
+
+            }
+        }
+    }
+    // Encontrar se tem 4 iguais na Diagonal direita p/ esquerda:
+    for(let l = 3; l < tabuleiro.length; l++){
+        for(let x = 0; x < bordaX; x++){
+            const celula = tabuleiro[l][x];
+            if(celula !== 0){
+                if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
+                    // FIM de jogo 4 seguidos Diagonal Direita p/ esquerda.
+                }
+
+            }
+        }
+    }
+
+} 
 
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
@@ -66,45 +122,43 @@ const criaDivJogador = () => {
     }
 }
 
-// Captura o ID das colunas para implementar a função de imprimir o disco do jogador:
-let coluna1 = document.getElementById("coluna1");
-let coluna2 = document.getElementById("coluna2");
-let coluna3 = document.getElementById("coluna3");
-let coluna4 = document.getElementById("coluna4");
-let coluna5 = document.getElementById("coluna5");
-let coluna6 = document.getElementById("coluna6");
-let coluna7 = document.getElementById("coluna7");
-
-
-// Função que imprime o disco do jogador >>>>>>>>>> funcionando apenas quando o clique é na célula onde quer colocar o disco; <<<<<<<<<<
-//// O parâmetro é correspondente ao evento de clique;
-const imprimeJogador = (evento) => {
-    let isCelula = evento.target.classList.contains('celula');
-    let isColuna = evento.target.classList.contains('coluna');
-    let hasChild = evento.target.childElementCount;
-    let target = evento.target;
+function jogada(e) {
     
+    // Retorna true ou false
+    let isCelula = e.target.classList.contains('celula');
+    let isColuna = e.target.classList.contains('coluna');
+    
+    // Retorna a quantidade de filhos da célula clicada
+    let hasChild = e.target.childElementCount;
+    
+    // Captura a célula clicada
+    let target = e.target;
     
     if (isCelula === true && hasChild === 0) {
-        let jogadorAtual = criaDivJogador();
-        target.appendChild(jogadorAtual);
+        let jogadorAtual = criaDivJogador()
+        target.appendChild(jogadorAtual)
+    } else {
+        alert('Joagada errada, tente outro campo!')
     }
     
-    console.log(evento);
+    console.log(e);
     console.log(`É célula? R: ${isCelula}`);
     console.log(`É coluna? R: ${isColuna}`);
     console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
+    
 }
 
+initTabuleiro();
+condicaoVitoria();
 
-// Eventos de clique com a função de imprimir o disco do jogador:
-coluna1.addEventListener('click', imprimeJogador)
-coluna2.addEventListener('click', imprimeJogador)
-coluna3.addEventListener('click', imprimeJogador)
-coluna4.addEventListener('click', imprimeJogador)
-coluna5.addEventListener('click', imprimeJogador)
-coluna6.addEventListener('click', imprimeJogador)
-coluna7.addEventListener('click', imprimeJogador)
+document.getElementById("coluna1").addEventListener('click', jogada)
+document.getElementById("coluna2").addEventListener('click', jogada)
+document.getElementById("coluna3").addEventListener('click', jogada)
+document.getElementById("coluna4").addEventListener('click', jogada)
+document.getElementById("coluna5").addEventListener('click', jogada)
+document.getElementById("coluna6").addEventListener('click', jogada)
+document.getElementById("coluna7").addEventListener('click', jogada)
+
 
 
 // função que verifica a condição de vitória/empate:
