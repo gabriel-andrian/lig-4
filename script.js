@@ -132,19 +132,30 @@ function jogada(e) {
     let hasChild = e.target.childElementCount;
     
     // Captura a célula clicada
-    let target = e.target;
+    let target = e.currentTarget;
     
     if (isCelula === true && hasChild === 0) {
-        let jogadorAtual = criaDivJogador()
-        target.appendChild(jogadorAtual)
+        for (let i = 5; i >= 0; i--) {
+            let celula = target.childNodes[i]
+                if (celula.childElementCount === 0) {
+                    let jogadorAtual = criaDivJogador()
+                    celula.appendChild(jogadorAtual)
+                    console.log(target.childNodes[i])
+                    break
+            }
+        }
     } else {
         alert('Joagada errada, tente outro campo!')
     }
     
-    console.log(e.currentTarget);
-    console.log(`É célula? R: ${isCelula}`);
-    console.log(`É coluna? R: ${isColuna}`);
-    console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
+
+    // console.log(target.childNodes[5])
+    // console.log(target)
+    // console.log(target.lastElementChild)
+    // console.log(e);
+    // console.log(`É célula? R: ${isCelula}`);
+    // console.log(`É coluna? R: ${isColuna}`);
+    // console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
     
 }
 
@@ -158,14 +169,9 @@ const atualizaPos = () => {
 initTabuleiro();
 condicaoVitoria();
 
-document.getElementById("coluna1").addEventListener('click', jogada)
-document.getElementById("coluna2").addEventListener('click', jogada)
-document.getElementById("coluna3").addEventListener('click', jogada)
-document.getElementById("coluna4").addEventListener('click', jogada)
-document.getElementById("coluna5").addEventListener('click', jogada)
-document.getElementById("coluna6").addEventListener('click', jogada)
-document.getElementById("coluna7").addEventListener('click', jogada)
-
+for (let a= 1; a <= 7; a++) {
+    document.getElementById(`coluna${a}`).addEventListener('click', jogada)
+}
 
 
 // função que verifica a condição de vitória/empate:
