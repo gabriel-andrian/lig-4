@@ -10,7 +10,7 @@ const tabuleiro = [
 
 // define o primeiro jogador (1/2);
 let jogadorAtv = 1;
-
+let gameOver = false;
 // classes do jogador no css:
 const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2";
@@ -55,7 +55,7 @@ function condicaoVitoria(){
             let celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
-                    // FIM do jogo 4 seguidos na horizontal.
+                    mensagemVitoria();
                 }
             }
         } 
@@ -67,7 +67,7 @@ function condicaoVitoria(){
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
-                    // FIM do jogo 4 seguidos na Vertical.
+                    mensagemVitoria();
                 }
             }
         }
@@ -78,7 +78,7 @@ function condicaoVitoria(){
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
-                    // Fim de jogo 4 seguidos Diagonal esquerda p/ direita.
+                    mensagemVitoria();
                 }
 
             }
@@ -90,7 +90,7 @@ function condicaoVitoria(){
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
-                    // FIM de jogo 4 seguidos Diagonal Direita p/ esquerda.
+                    mensagemVitoria();
                 }
 
             }
@@ -123,42 +123,49 @@ const criaDivJogador = () => {
 }
 
 function jogada(e) {
-    
-    // Retorna true ou false
-    let isCelula = e.target.classList.contains('celula');
-    let isColuna = e.target.classList.contains('coluna');
-    
-    // Retorna a quantidade de filhos da célula clicada
-    let hasChild = e.target.childElementCount;
-    
-    // Captura a célula clicada
-    let target = e.target;
-    
-    if (isCelula === true && hasChild === 0) {
-        let jogadorAtual = criaDivJogador()
-        target.appendChild(jogadorAtual)
-    } else {
-        alert('Joagada errada, tente outro campo!')
-    }
-    
-    console.log(e);
-    console.log(`É célula? R: ${isCelula}`);
-    console.log(`É coluna? R: ${isColuna}`);
-    console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
-    
+    if(gameOver !== true){
+        // Retorna true ou false
+        let isCelula = e.target.classList.contains('celula');
+        let isColuna = e.target.classList.contains('coluna');
+        
+        // Retorna a quantidade de filhos da célula clicada
+        let hasChild = e.target.childElementCount;
+        
+        // Captura a célula clicada
+        let target = e.target;
+        console.log(target);
+        
+        if (isCelula === true && hasChild === 0) {
+            let jogadorAtual = criaDivJogador()
+            target.appendChild(jogadorAtual)
+        // } else {
+            // alert('Joagada errada, tente outro campo!')
+        }
+        
+        // console.log(e);
+        // console.log(`É célula? R: ${isCelula}`);
+        // console.log(`É coluna? R: ${isColuna}`);
+        // console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
+    }    
+}
+
+function mensagemVitoria(){
+    gameOver = true;
+    const divVitoria = document.getElementById('vencedor');
+    const mensagemVitoria = document.getElementById('msgVitoria')
+    divVitoria.style.visibility = "visible";
+    mensagemVitoria.textContent = "PARABÉNS O JOGADOR "+jogadorAtv+" GANHOU!!!";
 }
 
 initTabuleiro();
-condicaoVitoria();
-
-document.getElementById("coluna1").addEventListener('click', jogada)
-document.getElementById("coluna2").addEventListener('click', jogada)
-document.getElementById("coluna3").addEventListener('click', jogada)
-document.getElementById("coluna4").addEventListener('click', jogada)
-document.getElementById("coluna5").addEventListener('click', jogada)
-document.getElementById("coluna6").addEventListener('click', jogada)
-document.getElementById("coluna7").addEventListener('click', jogada)
-
+// condicaoVitoria();
+    document.getElementById("coluna1").addEventListener('click', jogada)
+    document.getElementById("coluna2").addEventListener('click', jogada)
+    document.getElementById("coluna3").addEventListener('click', jogada)
+    document.getElementById("coluna4").addEventListener('click', jogada)
+    document.getElementById("coluna5").addEventListener('click', jogada)
+    document.getElementById("coluna6").addEventListener('click', jogada)
+    document.getElementById("coluna7").addEventListener('click', jogada)
 
 
 // função que verifica a condição de vitória/empate:

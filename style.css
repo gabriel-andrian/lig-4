@@ -53,6 +53,10 @@ header {
     background: #80808048;
 }
 
+#vencedor {
+    visibility: hidden;
+}
+
 footer {
     background: whitesmoke;
     height: 50px;
