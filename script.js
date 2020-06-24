@@ -10,6 +10,8 @@ const tabuleiro = [
 
 // define o primeiro jogador (1/2);
 let jogadorAtv = 1;
+let coluna = 0;
+let linha = 0;
 
 // classes do jogador no css:
 const classJogadorUm = "jogador1";
@@ -103,6 +105,7 @@ function condicaoVitoria(){
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
 
+    
     // inicia com o jogador atual;
     if (jogadorAtv === 1) {
         // cria a div correspondente à classe;
@@ -123,7 +126,7 @@ const criaDivJogador = () => {
 }
 
 function jogada(e) {
-    
+    // coluna = a
     // Retorna true ou false
     let isCelula = e.target.classList.contains('celula');
     let isColuna = e.target.classList.contains('coluna');
@@ -136,11 +139,10 @@ function jogada(e) {
     
     if (isCelula === true && hasChild === 0) {
         for (let i = 5; i >= 0; i--) {
-            let celula = target.childNodes[i]
-                if (celula.childElementCount === 0) {
+            let celula = target.childNodes[i]  
+                if (celula.childElementCount === 0) {  // Verifica o filho vazio para dar o append
                     let jogadorAtual = criaDivJogador()
                     celula.appendChild(jogadorAtual)
-                    console.log(target.childNodes[i])
                     break
             }
         }
@@ -148,11 +150,11 @@ function jogada(e) {
         alert('Joagada errada, tente outro campo!')
     }
     
-
+    console.log(jogadorAtual)
     // console.log(target.childNodes[5])
     // console.log(target)
     // console.log(target.lastElementChild)
-    // console.log(e);
+    console.log(e);
     // console.log(`É célula? R: ${isCelula}`);
     // console.log(`É coluna? R: ${isColuna}`);
     // console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
@@ -162,9 +164,10 @@ function jogada(e) {
 initTabuleiro();
 condicaoVitoria();
 
-for (let a= 1; a <= 7; a++) {
-    document.getElementById(`coluna${a}`).addEventListener('click', jogada)
+for (let a = 0; a <= 6; a++) {
+    document.getElementById(`coluna${a + 1}`).addEventListener('click', jogada)
 }
+console.log(coluna)
 
 
 // função que verifica a condição de vitória/empate:
