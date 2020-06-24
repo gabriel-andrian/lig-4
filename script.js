@@ -99,9 +99,6 @@ function condicaoVitoria(){
 
 } 
 
-initTabuleiro();
-condicaoVitoria();
-
 // função que cria a div do jogador 1 ou 2:
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
@@ -125,6 +122,35 @@ const criaDivJogador = () => {
     }
 }
 
+function jogada(e) {
+    
+    // Retorna true ou false
+    let isCelula = e.target.classList.contains('celula');
+    let isColuna = e.target.classList.contains('coluna');
+    
+    // Retorna a quantidade de filhos da célula clicada
+    let hasChild = e.target.childElementCount;
+    
+    // Captura a célula clicada
+    let target = e.target;
+    
+    if (isCelula === true && hasChild === 0) {
+        let jogadorAtual = criaDivJogador()
+        target.appendChild(jogadorAtual)
+    } else {
+        alert('Joagada errada, tente outro campo!')
+    }
+    
+    console.log(e);
+    console.log(`É célula? R: ${isCelula}`);
+    console.log(`É coluna? R: ${isColuna}`);
+    console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
+    
+}
+
+initTabuleiro();
+condicaoVitoria();
+
 document.getElementById("coluna1").addEventListener('click', jogada)
 document.getElementById("coluna2").addEventListener('click', jogada)
 document.getElementById("coluna3").addEventListener('click', jogada)
@@ -133,15 +159,6 @@ document.getElementById("coluna5").addEventListener('click', jogada)
 document.getElementById("coluna6").addEventListener('click', jogada)
 document.getElementById("coluna7").addEventListener('click', jogada)
 
-function jogada(e) {
-    if (e.path[0].childElementCount === 0 && e.path[0].className == 'celula') {
-        let jogadorAtual = criaDivJogador()
-        let pai = e.target
-        pai.appendChild(jogadorAtual)
-    } else {
-        alert('Joagada errada, tente outro campo!')
-    }
-}
 
 
 // função que verifica a condição de vitória/empate:
