@@ -141,11 +141,18 @@ function jogada(e) {
         alert('Joagada errada, tente outro campo!')
     }
     
-    console.log(e);
+    console.log(e.currentTarget);
     console.log(`É célula? R: ${isCelula}`);
     console.log(`É coluna? R: ${isColuna}`);
     console.log(`O elemento clicado tem ${hasChild} elementos filhos`);
     
+}
+
+const atualizaPos = () => {
+    // cada index do array é uma coluna da tabela, -1
+    // cada index do subarray representa o numero da linha
+
+    let idColuna = document.getElementById("coluna")
 }
 
 initTabuleiro();
