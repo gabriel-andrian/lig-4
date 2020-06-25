@@ -1,8 +1,8 @@
 :root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
     --tamanho: 4.5rem;
     --cor-fundo: white;
-    --cor-jogador1: orange;
-    --cor-jogador2: yellow;
+    --cor-jogador1: #FFE524;
+    --cor-jogador2: #CC3812;
     --bg-color: #7BA5C9;
     --bg-color-button: #767D07;
     --font-color-header: #F4FF4F;
@@ -153,6 +153,7 @@ main {
     border: 1px solid darkblue;
     margin: -1px;
     position: relative;
+    align-self: center;
     -webkit-animation-name: queda;
     -webkit-animation-duration: 0.3s;
     -webkit-animation-timing-function: linear;
