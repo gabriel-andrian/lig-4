@@ -19,10 +19,15 @@ let cont = 0;
 const classJogadorUm = "jogador1";
 const classJogadorDois = "jogador2";
 
-// Função para inicializar o tabuleiro vazio:
+// Função para inicializar o tabuleiro vazio e fazer aparecer quem é o primeiro jogador:
 function initTabuleiro() {
     createElementsColuna("coluna");
     createElementsCelula("celula");
+
+    let jogadorDaVez = document.getElementById('jogadorAtual')
+    let criaDiv = document.createElement('div')
+    criaDiv.className = classJogadorUm;
+    jogadorDaVez.appendChild(criaDiv)
 }
 
 // Criação das divs colunas, loop de criação de 7 colunas.
@@ -142,7 +147,7 @@ const criaDivJogador = () => {
 function jogada(e) {
     if(gameOver !== true){
         let isCelula = e.target.classList.contains('celula');
-        let isColuna = e.target.classList.contains('coluna');    
+        let isColuna = e.target.classList.contains('coluna');
         let hasChild = e.target.childElementCount;
         let target = e.currentTarget;
     
@@ -155,11 +160,24 @@ function jogada(e) {
                     linha = i;
                     let jogadorAtual = criaDivJogador()
                     celula.appendChild(jogadorAtual)
+                    
                     if(jogadorAtv === 1){
+                    
+                        let jogadorDaVez = document.getElementById('jogadorAtual')
+                        let criaDiv = document.createElement('div')
+                        criaDiv.className = classJogadorUm;
+                        jogadorDaVez.replaceChild(criaDiv, jogadorDaVez.lastChild)
+    
                         tabuleiro[linha][coluna] = 2;
                         cont+= 1;
                         condicaoVitoria();
                     } else{
+
+                        let jogadorDaVez = document.getElementById('jogadorAtual')
+                        let criaDiv = document.createElement('div')
+                        criaDiv.className = classJogadorDois;
+                        jogadorDaVez.replaceChild(criaDiv, jogadorDaVez.lastChild)
+
                         tabuleiro[linha][coluna] = 1;
                         cont+= 1;
                         condicaoVitoria();
