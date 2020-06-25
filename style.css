@@ -1,14 +1,15 @@
-:root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
-    --tamanho: 4.5rem;
+html { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
+    --tamanho: 9vh;
     --cor-fundo: white;
     --cor-jogador1: orange;
     --cor-jogador2: yellow;
     --bg-color: #7BA5C9;
-    --bg-color-button: #767D07;
+    --bg-color-button: #7d7e77;
     --font-color-header: #F4FF4F;
     --font-color-footer: #01437D;
     --font-color-jogador: #ddd;
     --font-color-resultado: #B51D16;
+    --cor-coluna: blue;
     --font-family-header: 'Bungee', cursive;
     --font-family-footer: 'Montserrat', sans-serif;
     --font-family-jogador-atual: "Quicksand", sans-serif;
@@ -57,6 +58,18 @@ footer {
 footer p {
     margin: 5px auto;
     padding: 5px 0;
+}
+
+footer p a:link {
+    text-decoration: none;
+}
+
+footer p a:visited {
+    color: var(--font-color-footer)
+}
+
+footer p a:hover {
+    text-shadow: 0 0 2px #000;
 }
 
 /* CONTINUAR A ESTILIZAR A PARTIR DAQUI */
@@ -132,7 +145,7 @@ main {
 .coluna {
     display: flex;
     flex-direction: column;
-    background: blue;
+    background: var(--cor-coluna);
     border: 0.5px solid darkblue;
     padding: 0 ;
 }
@@ -154,7 +167,7 @@ main {
     margin: -1px;
     position: relative;
     -webkit-animation-name: queda;
-    -webkit-animation-duration: 0.3s;
+    -webkit-animation-duration: 0.5s;
     -webkit-animation-timing-function: linear;
 }
 
@@ -177,4 +190,45 @@ main {
 
 #vencedor {
     visibility: hidden;
+}
+
+
+/* Para o botão de mudança de tema */
+
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: gray;
+    float: left;
+    border-radius: 100px;
+    position: relative;
+}
+
+label::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input:checked + label {
+    background: var(--font-color-header)
+}
+
+input:checked + label::after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
 }
