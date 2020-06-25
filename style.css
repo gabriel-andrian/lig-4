@@ -1,23 +1,132 @@
 :root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
-    --tamanho: 3rem;
+    --tamanho: 4.5rem;
     --cor-fundo: white;
     --cor-jogador1: orange;
     --cor-jogador2: yellow;
+    --bg-color: #7BA5C9;
+    --bg-color-button: #767D07;
+    --font-color-header: #F4FF4F;
+    --font-color-footer: #01437D;
+    --font-color-jogador: #ddd;
+    --font-color-resultado: #B51D16;
+    --font-family-header: 'Bungee', cursive;
+    --font-family-footer: 'Montserrat', sans-serif;
+    --font-family-jogador-atual: "Quicksand", sans-serif;
+    --font-family-resultado: "Press Start 2P", monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 20% 65% 15%;
+    grid-template-areas: "header"
+                         "main"
+                         "footer";
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    font-size: 15px;
 }
 
 header {
-    background: whitesmoke;
-    height: 50px;
-    font-family: 'Bungee', cursive;
+    grid-area: header;
+    font-family: var(--font-family-header);
+    color: var(--font-color-header);
+    justify-self: center;
+    align-self: end;
+    font-size: 4rem;
+    text-shadow: 0 0 4px #000;
+}
+
+footer {
+    font-family: var(--font-family-footer);
+    color: var(--font-color-footer);
+    grid-area: footer;
+    align-self: center;
+    justify-self: center;
+    font-size: 1.3rem;
     text-align: center;
-    color: blue;
+    text-shadow: 0 0 2px #227;
+}
+
+footer p {
+    margin: 5px auto;
+    padding: 5px 0;
+}
+
+/* CONTINUAR A ESTILIZAR A PARTIR DAQUI */
+
+main {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 30% 35% 30%;
+    grid-template-rows: 100%;
+    grid-template-areas: "atual jogo vencedor";
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: center;
+}
+
+#jogadorAtual {
+    grid-area: atual;
+    align-self: start;
+    font-family: var(--font-family-jogador-atual);
+    color: var(--font-color-jogador);
+    font-variant: small-caps;
+    font-size: 2.5rem;
+    text-shadow: 0 0 2px #227;
+    text-align: center;
+    justify-self: end;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: flex-start;
+}
+
+#jogadorAtual p {
+    margin: 1rem auto;
+    padding: 0.3rem;
 }
 
 #jogo{
-    padding: 10px 0;
+    grid-area: jogo;
+    width: fit-content;
     display: flex;
     justify-content: center;
     background: var(--cor-fundo);
+    box-shadow: 0 0 15px #FFF;
+}
+
+#vencedor {
+    grid-area: vencedor;
+    text-align: center;
+    justify-self: center;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: space-around;
+}
+
+#msgVitoria {
+    font-family: var(--font-family-resultado);
+    color: var(--font-color-resultado);
+    text-align: center;
+    text-shadow: 2px 1px 2px #000;
+    line-height: 3rem;
+}
+
+#vencedor button {
+    margin: 15px auto;
+    padding: 15px;
+    border-radius: 30px;
+    font-size: 1.2rem;
+    font-family: var(--font-family-resultado);
+    background-color: var(--bg-color-button);
+    color: var(--font-color-header);
 }
 
 .coluna {
@@ -43,13 +152,23 @@ header {
     height: var(--tamanho);
     border: 1px solid darkblue;
     margin: -1px;
+    position: relative;
+    -webkit-animation-name: queda;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-timing-function: linear;
 }
 
 .jogador1 {
     background: var(--cor-jogador1);
 }
+
 .jogador2 {
     background: var(--cor-jogador2);
+}
+
+@-webkit-keyframes queda {
+    from {top: -350px}
+    to {top: 0px}
 }
 
 .coluna .celula:hover {
@@ -58,9 +177,4 @@ header {
 
 #vencedor {
     visibility: hidden;
-}
-
-footer {
-    background: whitesmoke;
-    height: 50px;
 }
