@@ -1,23 +1,69 @@
 :root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
-    --tamanho: 3rem;
+    --tamanho: 4.5rem;
     --cor-fundo: white;
     --cor-jogador1: orange;
     --cor-jogador2: yellow;
+    --bg-color: #015F7D;
+    --font-color-header: #D6C951;
+    --font-color-footer: #D6C951;
+    --font-family-header: 'Bungee', cursive;
+    --font-family-footer: 'Montserrat', sans-serif;
+    --font-family-jogador-atual: "Quicksand", sans-serif;
+    --font-family-resultado: "Press Start 2P", monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    width: 80vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 15% 70% 15%;
+    grid-template-areas: "header"
+                         "main"
+                         "footer";
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    font-size: 15px;
 }
 
 header {
-    background: whitesmoke;
-    height: 50px;
-    font-family: 'Bungee', cursive;
-    text-align: center;
-    color: blue;
+    grid-area: header;
+    font-family: var(--font-family-header);
+    color: var(--font-color-header);
+    justify-self: center;
+    align-self: end;
+    font-size: 2rem;
+    text-shadow: 0 0 4px #000;
 }
 
+footer {
+    font-family: var(--font-family-footer);
+    color: var(--font-color-footer);
+    grid-area: footer;
+    align-self: center;
+    justify-self: center;
+    font-size: 1.3rem;
+    text-align: center;
+    text-shadow: 0 0 4px #44d;
+}
+
+footer p {
+    margin: 5px auto;
+    padding: 5px 0;
+}
+
+/* CONTINUAR A ESTILIZAR A PARTIR DAQUI */
+
 #jogo{
-    padding: 10px 0;
+    /* padding: 10px 0; */
     display: flex;
     justify-content: center;
     background: var(--cor-fundo);
+    box-shadow: 0 0 15px #FFF;
 }
 
 .coluna {
@@ -58,9 +104,4 @@ header {
 
 #vencedor {
     visibility: hidden;
-}
-
-footer {
-    background: whitesmoke;
-    height: 50px;
 }
