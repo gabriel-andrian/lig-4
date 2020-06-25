@@ -207,3 +207,52 @@ function mensagemRegras() {
     const divRegras = document.getElementById('regras');
     divRegras.style.visibility = "hidden";
 }
+
+
+// Modifica as estruturas de cor entre normal/dark
+const html = document.querySelector('html')
+const checkbox = document.querySelector('input[name=tema]')
+
+const getStyle = (element, style) => 
+    window
+        .getComputedStyle(element)
+        .getPropertyValue(style)
+
+
+const initialColors = {
+    corFundo: getStyle(html, '--cor-fundo'),
+    corJogador1: getStyle(html, '--cor-jogador1'),
+    corJogador2: getStyle(html, '--cor-jogador2'),
+    bgColor: getStyle(html, '--bg-color'),
+    bgColorbutton: getStyle(html, '--bg-colorbutton'),
+    fontColorheader: getStyle(html, '--font-colorheader'),
+    fontColorfooter: getStyle(html, '--font-colorfooter'),
+    fontColorjogador: getStyle(html, '--font-colorjogador'),
+    fontColorresultado: getStyle(html, '--font-colorresultado'),
+    corColuna: getStyle(html, '--cor-coluna')
+}
+
+const darkMode = {
+    corFundo: '#333',
+    corJogador1: '#4fff58',
+    corJogador2: '#17e3f1',
+    bgColor: '#333',
+    bgColorButton: '#fff',
+    fontColorHeader: '#4fff58',
+    fontColorFooter: '#17d9e7',
+    fontColorJogador: '#ddd',
+    fontColorResultado: '#f3c441',
+    corColuna: '#ebb34b'
+}
+
+const transformKey = key => '--' + key.replace(/([A-Z])/, '-$1').toLowerCase()
+
+const changeColors = (colors) => {
+    Object.keys(colors).map(key => 
+        html.style.setProperty(transformKey(key), colors[key])
+    )
+}
+
+checkbox.addEventListener('change', ({target}) => {
+    target.checked ? changeColors(darkMode) : changeColors(initialColors)
+})
