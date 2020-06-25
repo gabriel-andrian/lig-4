@@ -132,6 +132,7 @@ function mensagemEmpate(){
 //// o primeiro parâmetro tem que ser sempre o jogadorAtual, e o "lugar" é a div onde precisa fazer o appendChild
 const criaDivJogador = () => {
 
+    
     // inicia com o jogador atual;
     if (jogadorAtv === 1) {
         // cria a div correspondente à classe;
@@ -202,6 +203,7 @@ initTabuleiro();
 for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
 }
+console.log(coluna)
 
 
 // função que verifica a condição de vitória/empate:
