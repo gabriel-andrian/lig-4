@@ -1,14 +1,15 @@
-:root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
-    --tamanho: 4.5rem;
+html { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
+    --tamanho: 9vh;
     --cor-fundo: white;
     --cor-jogador1: #FFE524;
     --cor-jogador2: #CC3812;
     --bg-color: #7BA5C9;
-    --bg-color-button: #767D07;
+    --bg-color-button: #7d7e77;
     --font-color-header: #F4FF4F;
     --font-color-footer: #01437D;
     --font-color-jogador: #ddd;
     --font-color-resultado: #B51D16;
+    --cor-coluna: blue;
     --font-family-header: 'Bungee', cursive;
     --font-family-footer: 'Montserrat', sans-serif;
     --font-family-jogador-atual: "Quicksand", sans-serif;
@@ -57,6 +58,18 @@ footer {
 footer p {
     margin: 5px auto;
     padding: 5px 0;
+}
+
+footer p a:link {
+    text-decoration: none;
+}
+
+footer p a:visited {
+    color: var(--font-color-footer)
+}
+
+footer p a:hover {
+    text-shadow: 0 0 2px #000;
 }
 
 /* CONTINUAR A ESTILIZAR A PARTIR DAQUI */
@@ -111,6 +124,23 @@ main {
     align-content: space-around;
 }
 
+#regras {
+    grid-area: vencedor;
+    text-align: center;
+    justify-self: center;
+    flex-flow: column nowrap;
+    align-content: space-around;
+    font-family: var(--font-family-footer);
+    color: var(--font-color-header);
+    text-align: center;
+    line-height: 2rem;
+    margin-left: 20px;
+}
+
+#regras h3 {
+    text-decoration: underline;
+}
+
 #msgVitoria {
     font-family: var(--font-family-resultado);
     color: var(--font-color-resultado);
@@ -132,7 +162,7 @@ main {
 .coluna {
     display: flex;
     flex-direction: column;
-    background: blue;
+    background: var(--cor-coluna);
     border: 0.5px solid darkblue;
     padding: 0 ;
 }
@@ -155,7 +185,7 @@ main {
     position: relative;
     align-self: center;
     -webkit-animation-name: queda;
-    -webkit-animation-duration: 0.3s;
+    -webkit-animation-duration: 0.5s;
     -webkit-animation-timing-function: linear;
 }
 
@@ -178,4 +208,8 @@ main {
 
 #vencedor {
     visibility: hidden;
+}
+
+#regras {
+    visibility: visible;
 }

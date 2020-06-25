@@ -54,7 +54,8 @@ function createElementsCelula(className) {
 // Função para verificiar se ouve alguma vitória ou empate:
 function condicaoVitoria() {
     if(cont === 42){
-        mensagemEmpate();
+        mensagemEmpate()
+        mensagemRegras();
     }
     // Encontrar se tem 4 iguais na HORIZONTAL:
     const bordaX = (tabuleiro[0].length) - 3;
@@ -63,7 +64,8 @@ function condicaoVitoria() {
             let celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
-                    mensagemVitoria();
+                    mensagemVitoria()
+                    mensagemRegras();
                 }
             }
         }
@@ -75,7 +77,8 @@ function condicaoVitoria() {
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
-                    mensagemVitoria();
+                    mensagemVitoria()
+                    mensagemRegras();
                 }
             }
         }
@@ -86,7 +89,8 @@ function condicaoVitoria() {
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
-                    mensagemVitoria();
+                    mensagemVitoria()
+                    mensagemRegras();
                 }
 
             }
@@ -98,7 +102,8 @@ function condicaoVitoria() {
             const celula = tabuleiro[l][x];
             if(celula !== 0){
                 if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
-                    mensagemVitoria();
+                    mensagemVitoria()
+                    mensagemRegras();
                 }
             }
         }
@@ -119,7 +124,7 @@ function mensagemVitoria(){
     }
 }
 // Função para aparecer mensagem de empate, botão reset e parar o jogo:
-function mensagemEmpate(){
+function mensagemEmpate() {
     gameOver = true;
     const divVitoria = document.getElementById('vencedor');
     const mensagemVitoria = document.getElementById('msgVitoria')
@@ -194,4 +199,11 @@ initTabuleiro();
 // Verifica se aconteceu algum evento de clique nas colunas:
 for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
+}
+
+// Função para aparecer mensagem regras do jogo:
+function mensagemRegras() {
+    gameOver = true;
+    const divRegras = document.getElementById('regras');
+    divRegras.style.visibility = "hidden";
 }
