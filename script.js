@@ -203,7 +203,7 @@ initTabuleiro();
 for (let a = 1; a <= 7; a++) {
     document.getElementById(`coluna${a}`).addEventListener('click', jogada)
 }
-console.log(coluna)
+
 
 
 // função que verifica a condição de vitória/empate:
