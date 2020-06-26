@@ -101,7 +101,7 @@ main {
     flex-direction: column;
     background: var(--cor-coluna);
     border: 0.5px solid darkblue;
-    padding: 0 ;
+    padding: 0;
 }
 
 .celula {
@@ -122,7 +122,7 @@ main {
     position: relative;
     align-self: center;
     animation-name: queda;
-    animation-duration: 0.4s;
+    animation-duration: 0.5s;
     animation-timing-function: linear;
 }
 
@@ -200,24 +200,6 @@ main {
     background-color: var(--bg-colorbutton);
     color: var(--font-colorheader);
 }
-
-/* 
-para responsividade DEIXEI AQUI PARA O CASO DE PRECISAR RESOLVER SE A DIMINUIÇÃO DOS TAMANHOS, POR SI SÓ, NÃO RESOLVER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<:
-
-header {
-    font-size: 3rem;
-}
-
-footer {
-    font-size: 1rem;
-}
-
-.celula, .jogador1, .jogador2 {
-    width: 3.5rem;
-    height: 3.5rem;
-
- */
-/* Para o botão de mudança de tema */
 
 #darkMode {
     position: absolute;
@@ -302,3 +284,22 @@ footer p a:visited {
 footer p a:hover {
     text-shadow: 0 0 2px #000;
 }
+
+/* 
+@media all and (max-width )
+para responsividade DEIXEI AQUI PARA O CASO DE PRECISAR RESOLVER SE A DIMINUIÇÃO DOS TAMANHOS, POR SI SÓ, NÃO RESOLVER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<:
+
+header {
+    font-size: 3rem;
+}
+
+footer {
+    font-size: 1rem;
+}
+
+.celula, .jogador1, .jogador2 {
+    width: 3.5rem;
+    height: 3.5rem;
+
+ */
+/* Para o botão de mudança de tema */
