@@ -114,15 +114,60 @@ function condicaoVitoria() {
 // Função para aparecer mensagem de vitória, botão reset e parar o jogo:
 function mensagemVitoria(){
     gameOver = true;
-    const divVitoria = document.getElementById('vencedor');
+    // Captura onde precisa imprimir o resultado:
+    const divVitoria = document.getElementById('regrasResultado');
+    
+    
+
+
     const mensagemVitoria = document.getElementById('msgVitoria')
     divVitoria.style.visibility = "visible";
     if(jogadorAtv === 1){
-        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 2 GANHOU!!!";
+        // Cria a estrutura de onde vai o resultado:
+        const divVencedor = document.createElement('div');
+        divVencedor.id = 'vencedor';
+        const paragrafo = document.createElement('h1');
+        paragrafo.id = 'msgVitoria';
+        paragrafo.textContent = "PARABÉNS JOGADOR 2, VOCÊ GANHOU!!!";
+        const divButton = document.createElement('div');
+        const button = document.createElement('button');
+        button.classList = 'button_reset';
+        button.setAttribute('onclick', "window.history.go(0);");
+        button.innerText = "Jogar Novamente";
+        
+        // Junta as coisas todas criadas acima:
+        divButton.appendChild(button);
+        divVencedor.appendChild(paragrafo);
+        divVencedor.appendChild(divButton);
+
+        // Coloca nno html
+        divVitoria.removeChild(divVitoria.childNodes[0]);
+        divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
+
     } else{
-        mensagemVitoria.textContent = "PARABÉNS O JOGADOR 1 GANHOU!!!";
+        // Cria a estrutura de onde vai o resultado:
+        const divVencedor = document.createElement('div');
+        divVencedor.id = 'vencedor';
+        const paragrafo = document.createElement('h1');
+        paragrafo.id = 'msgVitoria';
+        paragrafo.textContent = "PARABÉNS JOGADOR 1, VOCÊ GANHOU!!!";
+        const divButton = document.createElement('div');
+        const button = document.createElement('button');
+        button.classList = 'button_reset';
+        button.setAttribute('onclick', "window.history.go(0);");
+        button.innerText = "Jogar Novamente";
+        
+        // Junta as coisas todas criadas acima:
+        divButton.appendChild(button);
+        divVencedor.appendChild(paragrafo);
+        divVencedor.appendChild(divButton);
+
+        // Coloca nno html
+        divVitoria.removeChild(divVitoria.childNodes[0]);
+        divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
     }
 }
+
 // Função para aparecer mensagem de empate, botão reset e parar o jogo:
 function mensagemEmpate() {
     gameOver = true;
