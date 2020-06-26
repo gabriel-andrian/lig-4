@@ -53,7 +53,7 @@ function createElementsCelula(className) {
 }
 // Função para verificiar se ouve alguma vitória ou empate:
 function condicaoVitoria() {
-    if(cont === 42){
+    if (cont === 42) {
         mensagemEmpate()
         mensagemRegras();
     }
@@ -62,8 +62,8 @@ function condicaoVitoria() {
     for (let l = 0; l < tabuleiro.length; l++) {
         for (let x = 0; x < bordaX; x++) {
             let celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l][x+1] && celula === tabuleiro[l][x+2] && celula === tabuleiro[l][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l][x + 1] && celula === tabuleiro[l][x + 2] && celula === tabuleiro[l][x + 3]) {
                     mensagemVitoria()
                     mensagemRegras();
                 }
@@ -75,8 +75,8 @@ function condicaoVitoria() {
     for (let l = 0; l < bordaY; l++) {
         for (let x = 0; x < tabuleiro[0].length; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l+1][x] && celula === tabuleiro[l+2][x] && celula === tabuleiro[l+3][x]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l + 1][x] && celula === tabuleiro[l + 2][x] && celula === tabuleiro[l + 3][x]) {
                     mensagemVitoria()
                     mensagemRegras();
                 }
@@ -87,8 +87,8 @@ function condicaoVitoria() {
     for (let l = 0; l < bordaY; l++) {
         for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l+1][x+1] && celula === tabuleiro[l+2][x+2] && celula === tabuleiro[l+3][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l + 1][x + 1] && celula === tabuleiro[l + 2][x + 2] && celula === tabuleiro[l + 3][x + 3]) {
                     mensagemVitoria()
                     mensagemRegras();
                 }
@@ -100,8 +100,8 @@ function condicaoVitoria() {
     for (let l = 3; l < tabuleiro.length; l++) {
         for (let x = 0; x < bordaX; x++) {
             const celula = tabuleiro[l][x];
-            if(celula !== 0){
-                if(celula === tabuleiro[l-1][x+1] && celula === tabuleiro[l-2][x+2] && celula === tabuleiro[l-3][x+3]){
+            if (celula !== 0) {
+                if (celula === tabuleiro[l - 1][x + 1] && celula === tabuleiro[l - 2][x + 2] && celula === tabuleiro[l - 3][x + 3]) {
                     mensagemVitoria()
                     mensagemRegras();
                 }
@@ -112,17 +112,15 @@ function condicaoVitoria() {
 }
 
 // Função para aparecer mensagem de vitória, botão reset e parar o jogo:
-function mensagemVitoria(){
+function mensagemVitoria() {
     gameOver = true;
     // Captura onde precisa imprimir o resultado:
     const divVitoria = document.getElementById('regrasResultado');
-    
-    
 
 
     const mensagemVitoria = document.getElementById('msgVitoria')
     divVitoria.style.visibility = "visible";
-    if(jogadorAtv === 1){
+    if (jogadorAtv === 1) {
         // Cria a estrutura de onde vai o resultado:
         const divVencedor = document.createElement('div');
         divVencedor.id = 'vencedor';
@@ -134,17 +132,16 @@ function mensagemVitoria(){
         button.classList = 'button_reset';
         button.setAttribute('onclick', "window.history.go(0);");
         button.innerText = "Jogar Novamente";
-        
+
         // Junta as coisas todas criadas acima:
         divButton.appendChild(button);
         divVencedor.appendChild(paragrafo);
         divVencedor.appendChild(divButton);
 
         // Coloca nno html
-        divVitoria.removeChild(divVitoria.childNodes[0]);
         divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
 
-    } else{
+    } else {
         // Cria a estrutura de onde vai o resultado:
         const divVencedor = document.createElement('div');
         divVencedor.id = 'vencedor';
@@ -156,14 +153,13 @@ function mensagemVitoria(){
         button.classList = 'button_reset';
         button.setAttribute('onclick', "window.history.go(0);");
         button.innerText = "Jogar Novamente";
-        
+
         // Junta as coisas todas criadas acima:
         divButton.appendChild(button);
         divVencedor.appendChild(paragrafo);
         divVencedor.appendChild(divButton);
 
         // Coloca nno html
-        divVitoria.removeChild(divVitoria.childNodes[0]);
         divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
     }
 }
@@ -171,10 +167,30 @@ function mensagemVitoria(){
 // Função para aparecer mensagem de empate, botão reset e parar o jogo:
 function mensagemEmpate() {
     gameOver = true;
-    const divVitoria = document.getElementById('vencedor');
-    const mensagemVitoria = document.getElementById('msgVitoria')
-    divVitoria.style.visibility = "visible";
-    mensagemVitoria.textContent = "EMPATE!";
+
+    // Captura onde precisa imprimir o resultado:
+    const divVitoria = document.getElementById('regrasResultado');
+
+    // Cria a estrutura de onde vai o resultado:
+    const divVencedor = document.createElement('div');
+    divVencedor.id = 'vencedor';
+    const paragrafo = document.createElement('h1');
+    paragrafo.id = 'msgVitoria';
+    paragrafo.textContent = "O JOGO EMPATOU!";
+    const divButton = document.createElement('div');
+    const button = document.createElement('button');
+    button.classList = 'button_reset';
+    button.setAttribute('onclick', "window.history.go(0);");
+    button.innerText = "Jogar Novamente";
+
+    // Junta as coisas todas criadas acima:
+    divButton.appendChild(button);
+    divVencedor.appendChild(paragrafo);
+    divVencedor.appendChild(divButton);
+
+    // Coloca nno html
+    divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
+
 }
 
 // função que cria a div do jogador 1 ou 2:
@@ -195,14 +211,14 @@ const criaDivJogador = () => {
 
 // Função de jogada, verifica se a bolinha do jogador pode ser inserida (main do programa):
 function jogada(e) {
-    if(gameOver !== true){
+    if (gameOver !== true) {
         let isCelula = e.target.classList.contains('celula');
         let isColuna = e.target.classList.contains('coluna');
         let hasChild = e.target.childElementCount;
         let target = e.currentTarget;
-    
+
         coluna = parseInt(e.target.parentNode.id.split('').pop()) - 1;
-    
+
         if (isCelula === true && hasChild === 0) {
             for (let i = 5; i >= 0; i--) {
                 let celula = target.childNodes[i]
@@ -210,18 +226,18 @@ function jogada(e) {
                     linha = i;
                     let jogadorAtual = criaDivJogador()
                     celula.appendChild(jogadorAtual)
-                    
-                    if(jogadorAtv === 1){
-                    
+
+                    if (jogadorAtv === 1) {
+
                         let jogadorDaVez = document.getElementById('jogadorAtual')
                         let criaDiv = document.createElement('div')
                         criaDiv.className = classJogadorUm;
                         jogadorDaVez.replaceChild(criaDiv, jogadorDaVez.lastChild)
-    
+
                         tabuleiro[linha][coluna] = 2;
-                        cont+= 1;
+                        cont += 1;
                         condicaoVitoria();
-                    } else{
+                    } else {
 
                         let jogadorDaVez = document.getElementById('jogadorAtual')
                         let criaDiv = document.createElement('div')
@@ -229,7 +245,7 @@ function jogada(e) {
                         jogadorDaVez.replaceChild(criaDiv, jogadorDaVez.lastChild)
 
                         tabuleiro[linha][coluna] = 1;
-                        cont+= 1;
+                        cont += 1;
                         condicaoVitoria();
                     }
                     break
@@ -258,7 +274,7 @@ function mensagemRegras() {
 const html = document.querySelector('html')
 const checkbox = document.querySelector('input[name=tema]')
 
-const getStyle = (element, style) => 
+const getStyle = (element, style) =>
     window
         .getComputedStyle(element)
         .getPropertyValue(style)
@@ -293,11 +309,11 @@ const darkMode = {
 const transformKey = key => '--' + key.replace(/([A-Z])/, '-$1').toLowerCase()
 
 const changeColors = (colors) => {
-    Object.keys(colors).map(key => 
+    Object.keys(colors).map(key =>
         html.style.setProperty(transformKey(key), colors[key])
     )
 }
 
-checkbox.addEventListener('change', ({target}) => {
+checkbox.addEventListener('change', ({ target }) => {
     target.checked ? changeColors(darkMode) : changeColors(initialColors)
 })
