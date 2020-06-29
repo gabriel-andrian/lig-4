@@ -149,7 +149,7 @@ main {
     grid-area: vencedor;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
+    justify-content: center;
     align-content: center;
     align-items: center;
 }
@@ -159,7 +159,8 @@ main {
     justify-self: center;
     display: flex;
     flex-flow: column nowrap;
-    align-content: space-around;
+    align-content: center;
+    justify-content: center;
 }
 
 #regras {

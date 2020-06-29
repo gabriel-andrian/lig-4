@@ -139,6 +139,7 @@ function mensagemVitoria() {
         divVencedor.appendChild(divButton);
 
         // Coloca nno html
+        divVitoria.removeChild(divVitoria.firstChild)
         divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
 
     } else {
@@ -160,6 +161,7 @@ function mensagemVitoria() {
         divVencedor.appendChild(divButton);
 
         // Coloca nno html
+        divVitoria.removeChild(divVitoria.firstChild)
         divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
     }
 }
@@ -189,6 +191,7 @@ function mensagemEmpate() {
     divVencedor.appendChild(divButton);
 
     // Coloca nno html
+    divVitoria.removeChild(divVitoria.firstChild)
     divVitoria.replaceChild(divVencedor, divVitoria.firstChild);
 
 }
