@@ -1,51 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="reset.css">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="style.css" />
     <link
-        href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat&family=Press+Start+2P&family=Quicksand:wght@600&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat&family=Press+Start+2P&family=Quicksand:wght@600&display=swap"
+      rel="stylesheet"
+    />
     <title>Lig-4</title>
-    <link rel="shortcut icon" href="./favicon.jpg">
-</head>
+    <link rel="shortcut icon" href="./favicon.jpg" />
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>LIG-4</h1>
+      <h1>LIG-4</h1>
     </header>
     <main>
-        <aside id="jogadorAtual">
-            <p>Agora é a vez do jogador:</p>
-        </aside>
-        <aside id='regrasResultado'>
-            <div id="regras">
-                <h3>REGRAS E OBJETIVO</h3>
-                <p>Dois jogadores jogam aleatoriamente e cada um escolhe a coluna que deseja jogar, não podendo mais
-                    trocar. movimentos são feitos alternadamente, um por turno.</p>
-                <p>O objetivo para ambos os jogadores é fazer uma linha reta de quatro peças próprias; a linha pode ser
-                    vertical, horizontal ou diagonal.</p>
-            </div>
-
-            <div id='darkMode' class="dark">
-                <p>DarkMode<input id="switch" type="checkbox" name="tema"><label for="switch">DarkMode</label></p>
-            </div>
-        </aside>
-        <div id="jogo">
-
+      <aside id="jogadorAtual">
+        <p>Agora é a vez do jogador:</p>
+      </aside>
+      <aside id="regrasResultado">
+        <div id="regras">
+          <h3>REGRAS E OBJETIVO</h3>
+          <p>
+            Dois jogadores jogam aleatoriamente e cada um escolhe a coluna que
+            deseja jogar, não podendo mais trocar. movimentos são feitos
+            alternadamente, um por turno.
+          </p>
+          <p>
+            O objetivo para ambos os jogadores é fazer uma linha reta de quatro
+            peças próprias; a linha pode ser vertical, horizontal ou diagonal.
+          </p>
         </div>
+
+        <div id="darkMode" class="dark">
+          <p>
+            DarkMode<input id="switch" type="checkbox" name="tema" /><label
+              for="switch"
+              >DarkMode</label
+            >
+          </p>
+        </div>
+      </aside>
+      <div id="jogo"></div>
     </main>
     <footer>
-        <p>Made by: <a href="https://gitlab.com/PauloSantosIII">Paulo Santos</a> + <a
-                href="https://gitlab.com/gabriel_andrian">Gabriel Andrian</a> + <a
-                href="https://gitlab.com/hdelavidaum">Henrique Delavi Daum</a></p>
-        <p>Kenzie Academy Brasil <br> Q1-abr-20 | Jun./2020</p>
+      <p>
+        Made by:
+        <a href="https://gitlab.com/gabriel_andrian">Gabriel Andrian</a> +
+        <a href="https://gitlab.com/PauloSantosIII">Paulo Santos</a> +
+        <a href="https://gitlab.com/hdelavidaum">Henrique Delavi Daum</a>
+      </p>
+      <p>
+        Kenzie Academy Brasil <br />
+        Q1-abr-20 | Jun./2020
+      </p>
     </footer>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

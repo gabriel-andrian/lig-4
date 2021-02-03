@@ -1,289 +1,296 @@
-:root { /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
-    --tamanho: 9vh;
-    --cor-fundo: white;
-    --cor-jogador1: #FFE524;
-    --cor-jogador2: #CC3812;
-    --bg-color: #7BA5C9;
-    --bg-colorbutton: #7d7e77;
-    --font-colorheader: #F4FF4F;
-    --font-colorfooter: #01437D;
-    --font-colorjogador: #ddd;
-    --font-colorresultado: #B51D16;
-    --cor-coluna: blue;
-    --font-family-header: 'Bungee', cursive;
-    --font-family-footer: 'Montserrat', sans-serif;
-    --font-family-jogador-atual: "Quicksand", sans-serif;
-    --font-family-resultado: "Press Start 2P", monospace;
+:root {
+  /* as cores e tamanhos aqui são para ser feita alteração somente uma vez */
+  --tamanho: 9vh;
+  --cor-fundo: white;
+  --cor-jogador1: #ffe524;
+  --cor-jogador2: #cc3812;
+  --bg-color: #7ba5c9;
+  --bg-colorbutton: #7d7e77;
+  --font-colorheader: #f4ff4f;
+  --font-colorfooter: #01437d;
+  --font-colorjogador: #ddd;
+  --font-colorresultado: #b51d16;
+  --cor-coluna: blue;
+  --font-family-header: "Bungee", cursive;
+  --font-family-footer: "Montserrat", sans-serif;
+  --font-family-jogador-atual: "Quicksand", sans-serif;
+  --font-family-resultado: "Press Start 2P", monospace;
 }
 
 /* TUDO QUE ENVOLVE APENAS O BODY EM GERAL */
 
 body {
-    background-color: var(--bg-color);
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 20% 65% 15%;
-    grid-template-areas: "header"
-                         "main"
-                         "footer";
-    justify-items: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    font-size: 15px;
-    position: relative;
+  background-color: var(--bg-color);
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20% 65% 15%;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  font-size: 15px;
+  position: relative;
 }
 
 /* TUDO QUE ENVOLVE APENAS OS ELEMENTOS DO HEADER */
 
 header {
-    grid-area: header;
-    font-family: var(--font-family-header);
-    color: var(--font-colorheader);
-    justify-self: center;
-    align-items: end;
-    font-size: 3rem;
-    text-shadow: 0 0 4px #000;
+  grid-area: header;
+  font-family: var(--font-family-header);
+  color: var(--font-colorheader);
+  justify-self: center;
+  align-items: end;
+  font-size: 3rem;
+  text-shadow: 0 0 4px #000;
 }
 
 /* TUDO QUE ENVOLVE O MAIN ONDE ESTÁ O JOGO */
 
 /* Definição da divisão do main para servir de container */
 main {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    grid-template-columns: 30% 35% 30%;
-    grid-template-rows: 100%;
-    grid-template-areas: "atual jogo vencedor";
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 30% 35% 30%;
+  grid-template-rows: 100%;
+  grid-template-areas: "atual jogo vencedor";
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
 }
 
 /* Aside em que aparece a informação do jogador que detém a jogada */
 #jogadorAtual {
-    grid-area: atual;
-    align-self: start;
-    font-family: var(--font-family-jogador-atual);
-    color: var(--font-colorjogador);
-    font-variant: small-caps;
-    font-size: 2.5rem;
-    text-shadow: 0 0 2px #227;
-    text-align: center;
-    justify-self: center;
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: flex-start;
+  grid-area: atual;
+  align-self: start;
+  font-family: var(--font-family-jogador-atual);
+  color: var(--font-colorjogador);
+  font-variant: small-caps;
+  font-size: 2.5rem;
+  text-shadow: 0 0 2px #227;
+  text-align: center;
+  justify-self: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: flex-start;
 }
 
 #jogadorAtual p {
-    margin: 1rem auto;
-    padding: 0.3rem;
+  margin: 1rem auto;
+  padding: 0.3rem;
 }
 
 /* Div em que será criado o jogo dinamicamente pelo javascript */
 
-#jogo{
-    grid-area: jogo;
-    width: fit-content;
-    display: flex;
-    justify-content: center;
-    background: var(--cor-fundo);
-    box-shadow: 0 0 15px #FFF;
+#jogo {
+  grid-area: jogo;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  background: var(--cor-fundo);
+  box-shadow: 0 0 15px #fff;
 }
 
 .coluna {
-    display: flex;
-    flex-direction: column;
-    background: var(--cor-coluna);
-    border: 0.5px solid darkblue;
-    padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--cor-coluna);
+  border: 0.5px solid darkblue;
+  padding: 0;
 }
 
 .celula {
-    border: 1px solid darkblue;
-    border-radius: 50%;
-    width: var(--tamanho);
-    height: var(--tamanho);
-    background: var(--cor-fundo);
-    margin: 2px;
+  border: 1px solid darkblue;
+  border-radius: 50%;
+  width: var(--tamanho);
+  height: var(--tamanho);
+  background: var(--cor-fundo);
+  margin: 2px;
 }
 
-.jogador1, .jogador2 {
-    border-radius: 50%;
-    width: var(--tamanho);
-    height: var(--tamanho);
-    border: 1px solid darkblue;
-    margin: -1px;
-    position: relative;
-    align-self: center;
-    animation-name: queda;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
+.jogador1,
+.jogador2 {
+  border-radius: 50%;
+  width: var(--tamanho);
+  height: var(--tamanho);
+  border: 1px solid darkblue;
+  margin: -1px;
+  position: relative;
+  align-self: center;
+  animation-name: queda;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
 }
 
 .jogador1 {
-    background: var(--cor-jogador1);
+  background: var(--cor-jogador1);
 }
 
 .jogador2 {
-    background: var(--cor-jogador2);
+  background: var(--cor-jogador2);
 }
 
 @keyframes queda {
-    from {top: -350px}
-    to {top: 0px}
+  from {
+    top: -350px;
+  }
+  to {
+    top: 0px;
+  }
 }
 
 .coluna .celula:hover {
-    background: #80808048;
+  background: #80808048;
 }
 
 /* Aside que contém as divs que inicialmente apresenta regras e depois é substituído pelo resultado */
 
 #regrasResultado {
-    grid-area: vencedor;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+  grid-area: vencedor;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 #vencedor {
-    text-align: center;
-    justify-self: center;
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: center;
-    justify-content: center;
+  text-align: center;
+  justify-self: center;
+  display: flex;
+  flex-flow: column nowrap;
+  align-content: center;
+  justify-content: center;
 }
 
 #regras {
-    visibility: visible;
-    grid-area: vencedor;
-    justify-self: center;
-    flex-flow: column nowrap;
-    align-content: space-around;
-    font-family: var(--font-family-footer);
-    color: var(--font-colorheader);
-    text-align: center;
-    line-height: 2rem;
-    margin: 20px auto;
-    width: 80%;
-    font-size: 1.2rem;
+  visibility: visible;
+  grid-area: vencedor;
+  justify-self: center;
+  flex-flow: column nowrap;
+  align-content: space-around;
+  font-family: var(--font-family-footer);
+  color: var(--font-colorheader);
+  text-align: center;
+  line-height: 2rem;
+  margin: 20px auto;
+  width: 80%;
+  font-size: 1.2rem;
 }
 
 #regras h3 {
-    text-decoration: underline;
-    margin: 1.5rem auto
+  text-decoration: underline;
+  margin: 1.5rem auto;
 }
 
 #msgVitoria {
-    font-family: var(--font-family-resultado);
-    color: var(--font-colorresultado);
-    text-align: center;
-    text-shadow: 2px 1px 2px #000;
-    line-height: 3rem;
+  font-family: var(--font-family-resultado);
+  color: var(--font-colorresultado);
+  text-align: center;
+  text-shadow: 2px 1px 2px #000;
+  line-height: 3rem;
 }
 
 #vencedor button {
-    
-    margin: 15px auto;
-    padding: 15px;
-    border-radius: 30px;
-    font-size: 1.2rem;
-    font-family: var(--font-family-resultado);
-    background-color: var(--bg-colorbutton);
-    color: var(--font-colorheader);
+  margin: 15px auto;
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  font-family: var(--font-family-resultado);
+  background-color: var(--bg-colorbutton);
+  color: var(--font-colorheader);
 }
 
 #darkMode {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 30px 40px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 30px 40px;
 }
 
 .dark p {
-    color: var(--font-colorjogador);
-    font-family: var(var(--font-family-jogador-atual));
-    font-size: 1.5rem;
+  color: var(--font-colorjogador);
+  font-family: var(var(--font-family-jogador-atual));
+  font-size: 1.5rem;
 }
 
-input[type=checkbox] {
-    height: 0;
-    width: 0;
-    visibility: visible;
+input[type="checkbox"] {
+  height: 0;
+  width: 0;
+  visibility: visible;
 }
 
 label {
-    cursor: pointer;
-    text-indent: -9999px;
-    width: 52px;
-    height: 27px;
-    background: white;
-    float: left;
-    border-radius: 100px;
-    position: relative;
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 52px;
+  height: 27px;
+  background: white;
+  float: left;
+  border-radius: 100px;
+  position: relative;
 }
 
 label::after {
-    content: '';
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 20px;
-    height: 20px;
-    background: var(--bg-color);
-    border-radius: 90px;
-    transition: 0.3s;
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: var(--bg-color);
+  border-radius: 90px;
+  transition: 0.3s;
 }
 
 input:checked + label {
-    background: var(--font-colorheader)
+  background: var(--font-colorheader);
 }
 
 input:checked + label::after {
-    left: calc(100% - 5px);
-    transform: translateX(-100%);
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
 }
 
 label:active:after {
-    width: 45px;
+  width: 45px;
 }
 
 /* TUDO QUE ENVOLVE APENAS OS ELEMENTOS DO FOOTER */
 footer {
-    font-family: var(--font-family-footer);
-    color: var(--font-colorfooter);
-    grid-area: footer;
-    align-self: center;
-    justify-self: center;
-    font-size: 1rem;
-    text-align: center;
-    text-shadow: 0 0 2px #227;
+  font-family: var(--font-family-footer);
+  color: var(--font-colorfooter);
+  grid-area: footer;
+  align-self: center;
+  justify-self: center;
+  font-size: 1rem;
+  text-align: center;
+  text-shadow: 0 0 2px #227;
 }
 
 footer p {
-    margin: 5px auto;
-    padding: 5px 0;
+  margin: 5px auto;
+  padding: 5px 0;
 }
 
 footer p a:link {
-    text-decoration: none;
+  color: #01437d;
+  text-decoration: none;
 }
 
 footer p a:visited {
-    color: var(--font-colorfooter)
+  color: var(--font-colorfooter);
 }
 
 footer p a:hover {
-    text-shadow: 0 0 2px #000;
+  text-shadow: 0 0 2px #000;
 }
 
 /* 
